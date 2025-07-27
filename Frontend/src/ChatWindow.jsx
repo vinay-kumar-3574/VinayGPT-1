@@ -3,11 +3,14 @@ import Chat from "./Chat.jsx";
 import { MyContext } from "./MyContext.jsx";
 import { useContext, useState, useEffect } from "react";
 import { ScaleLoader } from "react-spinners";
-
+import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
+import { Plus, SlidersHorizontal, Mic } from 'lucide-react';
+import { ShimmeringText } from '@/components/animate-ui/text/shimmering';
 function ChatWindow() {
     const { prompt, setPrompt, reply, setReply, currThreadId, setPrevChats, setNewChat } = useContext(MyContext);
     const [loading, setLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+
 
     const getReply = async () => {
         setLoading(true);
@@ -88,27 +91,49 @@ function ChatWindow() {
             <ScaleLoader color="#fff" loading={loading} />
 
             {/* Chat Input */}
-            <div className="w-full flex flex-col justify-center items-center">
-                <div className="w-full max-w-[700px] relative flex justify-between items-center">
+            <div className="w-full flex flex-col justify-center items-center px-4">
+                <div className="w-full max-w-[700px] relative flex items-center gap-2 bg-[#1e1e1f] border border-[#2e2e2f] rounded-2xl px-4 py-3 shadow-lg">
+
+                    {/* Left icons */}
+                    <div className="flex gap-2 items-center">
+                        <button className="hover:bg-[#2c2c2e] p-2 rounded-full transition-all duration-200">
+                            <Plus className="h-4 w-4 text-[#a1a1aa]" />
+                        </button>
+                        <button className="hover:bg-[#2c2c2e] p-2 rounded-full transition-all duration-200">
+                            <SlidersHorizontal className="h-4 w-4 text-[#a1a1aa]" />
+                        </button>
+                    </div>
+
+                    {/* Input box */}
                     <input
                         placeholder="Ask anything"
                         value={prompt}
                         onChange={(e) => setPrompt(e.target.value)}
                         onKeyDown={(e) => e.key === 'Enter' ? getReply() : ''}
-                        className="w-full bg-white/5 p-5 text-sm rounded-[14px] shadow-[0_54px_55px_rgba(0,0,0,0.05),0_-12px_30px_rgba(0,0,0,0.05),0_4px_6px_rgba(0,0,0,0.05),0_12px_3px_rgba(0,0,0,0.05),0_-3px_5px_rgba(0,0,0,0.05)] text-white focus:outline-none"
+                        className="flex-1 bg-transparent text-white text-sm placeholder-[#888] focus:outline-none px-2"
                     />
-                    <div
-                        id="submit"
-                        onClick={getReply}
-                        className="cursor-pointer h-[35px] w-[35px] text-[20px] absolute right-[15px] flex items-center justify-center text-white hover:text-white"
-                    >
-                        <i className="fa-solid fa-paper-plane"></i>
+
+                    {/* Right icons */}
+                    <div className="flex gap-2 items-center">
+                        <button className="hover:bg-[#2c2c2e] p-2 rounded-full transition-all duration-200">
+                            <Mic className="h-4 w-4 text-[#a1a1aa]" />
+                        </button>
+
+
+                        {/* Ask button */}
+                        <InteractiveHoverButton onClick={getReply}>
+                            Ask
+                        </InteractiveHoverButton>
                     </div>
                 </div>
-                <p className="text-sm p-2 text-[#b4b4b4]">
-                    SigmaGPT can make mistakes. Check important info. See Cookie Preferences.
-                </p>
+
+                <ShimmeringText
+                    className="text-sm text-[#b4b4b4] mt-2 text-center"
+                    text="SigmaGPT can make mistakes. Check important info. See Cookie Preferences."
+                    wave
+                />
             </div>
+
         </div>
     );
 }
