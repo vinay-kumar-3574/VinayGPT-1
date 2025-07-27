@@ -92,19 +92,9 @@ function ChatWindow() {
 
             {/* Chat Input */}
             <div className="w-full flex flex-col justify-center items-center px-4">
-                <div className="w-full max-w-[700px] relative flex items-center gap-2 bg-[#1e1e1f] border border-[#2e2e2f] rounded-2xl px-4 py-3 shadow-lg">
+                <div className="w-full max-w-[700px] relative flex items-center bg-[#1e1e1f] border border-[#2e2e2f] rounded-2xl px-4 py-3 shadow-lg gap-2">
 
-                    {/* Left icons */}
-                    <div className="flex gap-2 items-center">
-                        <button className="hover:bg-[#2c2c2e] p-2 rounded-full transition-all duration-200">
-                            <Plus className="h-4 w-4 text-[#a1a1aa]" />
-                        </button>
-                        <button className="hover:bg-[#2c2c2e] p-2 rounded-full transition-all duration-200">
-                            <SlidersHorizontal className="h-4 w-4 text-[#a1a1aa]" />
-                        </button>
-                    </div>
-
-                    {/* Input box */}
+                    {/* Input box (first in order) */}
                     <input
                         placeholder="Ask anything"
                         value={prompt}
@@ -113,26 +103,38 @@ function ChatWindow() {
                         className="flex-1 bg-transparent text-white text-sm placeholder-[#888] focus:outline-none px-2"
                     />
 
-                    {/* Right icons */}
+                    {/* Right-side buttons */}
                     <div className="flex gap-2 items-center">
+                        {/* Plus Button */}
+                        <button className="hover:bg-[#2c2c2e] p-2 rounded-full transition-all duration-200">
+                            <Plus className="h-4 w-4 text-[#a1a1aa]" />
+                        </button>
+
+                        {/* Tools Button */}
+                        <button className="hover:bg-[#2c2c2e] p-2 rounded-full transition-all duration-200">
+                            <SlidersHorizontal className="h-4 w-4 text-[#a1a1aa]" />
+                        </button>
+
+                        {/* Mic Button */}
                         <button className="hover:bg-[#2c2c2e] p-2 rounded-full transition-all duration-200">
                             <Mic className="h-4 w-4 text-[#a1a1aa]" />
                         </button>
 
-
-                        {/* Ask button */}
+                        {/* Ask Button */}
                         <InteractiveHoverButton onClick={getReply}>
                             Ask
                         </InteractiveHoverButton>
                     </div>
                 </div>
 
+                {/* Disclaimer animation text */}
                 <ShimmeringText
                     className="text-sm text-[#b4b4b4] mt-2 text-center"
                     text="SigmaGPT can make mistakes. Check important info. See Cookie Preferences."
                     wave
                 />
             </div>
+
 
         </div>
     );

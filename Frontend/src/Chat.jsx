@@ -63,6 +63,7 @@ function Chat() {
 
   return (
     <>
+    
       {newChat && <h1 className="text-white text-center my-4">Start a New Chat!</h1>}
 
       <div
